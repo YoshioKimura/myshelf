@@ -12,10 +12,10 @@ var mysql = require('mysql');
 //ここに書く
 
 var dbConfig = {
-  host: 'us-cdbr-iron-east-01.cleardb.net',
-  user: 'b51f27ffa98348',
-  password: '48e7e23f',
-  database: 'heroku_c0eef81e13c3c73'
+  host: '***********',
+  user: '***********',
+  password: '***********',
+  database: '***********'
 };
 
 
