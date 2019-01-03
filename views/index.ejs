@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="URF-8">
+  <title>木村の本棚の中</title>
+  <%- include("./_share/stylesheets.ejs") %>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+<style>
+
+.small{
+  height: 100% !important;
+}
+
+.card-image img{
+  max-height:248px;
+}
+
+div .card-content{
+    padding-left: 24px !important;
+    padding-right: 24px !important;
+    padding-top: 8px !important;
+    padding-bottom: 26px !important;
+}
+
+
+.textOverFlow{
+  line-height:2;
+  font-size:14px;
+  height: 56px;
+  overflow: hidden;
+  position: relative;
+  word-break: break-all; 
+  text-align:justify; 
+  text-justify: inter-ideograph; 
+}
+
+.textOverFlow:before{
+  position: absolute;
+  content: "..."; 
+    background: #fff; 
+    width: 1em;
+    font-size: 14px;
+    right: 0px;
+    text-align: center;
+    top:28px;
+}
+
+.textOverFlow:after{
+  position: absolute;
+    content: "";
+    height: 100%;
+    width: 100%;
+    background: #fff;
+}
+  
+
+
+</style>
+</head>
+
+<body>
+  <nav class="header orange accent-3"><a href="#" class="brand-logo"><img src="/images/logo.png" alt="" width="200px"></a></nav>
+
+  <div class="container">
+    <div class="page-header">
+      <h1><i class="fa fa-search fa-fw"></i>  </h1>
+    </div>
+    <form method="GET" action="/search" class="form-inline">
+      <input type="text" id="keyword" name="keyword" class="form-control" value="" />
+      <input type="submit" value="検索" class="btn btn-default" style="display:none" />
+    </form>
+
+    <div id="search-result__list"></div>
+    <div id="search-result__hit-num"></div>
+
+    <div>
+        <div class="row">
+
+            <% for(var i = 0; i < bookList.length; i++){ %>
+             <div class="col data<%= i %> s3">
+                <div class="card small">
+                    <div class="card-image">
+                      <img src="<%=  bookList[i].image_path %>" height="224px">
+                      <span class="card-title"></span>
+                      
+                    </div>
+                    <div class="card-content">
+                      <p class="textOverFlow"><%=  bookList[i].name %></p>
+                    </div>
+                  </div>
+            </div>
+            <% } %>
+
+
+
+
+        </div>
+      </div>
+    </div>
+
+  </div>
+</body>
+<!-- Include JS files -->
+<script  src="https://code.jquery.com/jquery-3.1.1.min.js"  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="  crossorigin="anonymous"></script>
+
+<script>
+
+
+  function searchWord(){
+    var searchResult,
+        searchText = $(this).val(),
+        targetText,
+        hitNum;
+
+        searchResult = [];
+
+        $('#search-result__list').empty();
+        $('#search-result__hit-num').empty();
+
+        if(searchText != ""){
+          $(".textOverFlow").each(function(i, val){
+            targetText = $(this).text();
+
+            if(targetText.indexOf(searchText) != -1){
+              searchResult.push(targetText);
+              // $(`div:not(${this})`).hide();
+            }else{
+              $(`.data${i}`).hide();
+              console.log(i+"番を削除");
+            }
+          });
+          console.log(searchResult.length);
+          for(let i = 0; i < searchResult.length; i++) {
+            $('<span>').text(searchResult[i]).appendTo('#search-result__list');
+          }
+          hitNum = '<span>検索結果</span>：' + searchResult.length + '件見つかりました。';
+          $('#search-result__hit-num').append(hitNum);     
+        }else{
+          $(`.col`).show();
+        }
+  }
+  $("#keyword").on('input',searchWord);
+
+
+</script>
+
+</html>
