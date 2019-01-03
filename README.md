@@ -5,7 +5,9 @@
 # 使い方
 
 npm install
+
 mysqlconnection.jsのパスワード欄を入力
+
 npm start
 
 # Dockerによる環境構築
