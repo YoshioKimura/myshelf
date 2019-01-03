@@ -1,0 +1,23 @@
+version: "3.5"
+
+services:
+  web:
+    build: ./node
+    tty: true
+    volumes:
+      - ../:/app
+    ports:
+      - "3000:3000"
+    links:
+      - mysql
+  mysql:
+    build: ./mysql/
+    volumes:
+      - ./mysql/mysql_data:/var/lib/mysql # データの永続化
+      - ./mysql/sqls:/docker-entrypoint-initdb.d # 初期データ投入
+    ports:
+      - "13306:13306"
+    environment:
+        MYSQL_ROOT_PASSWORD: password
+        MYSQL_PASSWORD: password
+        MYSQL_DATABASE: shelf
