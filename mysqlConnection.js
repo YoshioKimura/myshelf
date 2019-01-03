@@ -8,15 +8,22 @@ var mysql = require('mysql');
 //   database: 'bulletin_issue'
 // };
 
+//for Docker
+var dbConfig = {
+  host: 'mysql',
+  user: 'root',
+  password: 'password',
+  database: 'shelf'
+};
 
 //ここに書く
 
-var dbConfig = {
-  host: '***********',
-  user: '***********',
-  password: '***********',
-  database: '***********'
-};
+// var dbConfig = {
+//   host: '***********',
+//   user: '***********',
+//   password: '***********',
+//   database: '***********'
+// };
 
 
 ysql://b81de1fc97d0cf:0ea4d4bf@us-cdbr-iron-east-03.cleardb.net/heroku_570104d33486c83?reconnect=true
