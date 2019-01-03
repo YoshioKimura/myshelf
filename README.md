@@ -20,7 +20,7 @@ https://www.docker.com/get-started
 git clone https://github.com/YoshioKimura/myshelf.git
 cd ./docker
 docker-compose build
-dockr-compose up -d
+docker-compose up -d
 ```
 
 ### 起動
